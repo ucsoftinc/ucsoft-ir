@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" id="htmlRoot">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>یوسی سافت | UC SOFT</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --blue-deep: #0a1628;
+    --blue-dark: #0d1f3c;
+    --blue-mid: #1a3a6e;
+    --blue-bright: #1d6fdb;
+    --blue-glow: #3b8fff;
+    --blue-light: #60a5fa;
+    --blue-pale: #bfdbfe;
+    --white: #ffffff;
+    --white-soft: #f0f6ff;
+    --gray: #94a3b8;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Vazirmatn', sans-serif; background: var(--blue-deep); color: var(--white); overflow-x: hidden; }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: linear-gradient(rgba(29,111,219,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(29,111,219,0.06) 1px, transparent 1px);
+    background-size: 60px 60px; pointer-events: none; z-index: 0;
+  }
+
+  /* LANG SWITCHER */
+  .lang-switcher {
+    position: fixed; top: 1.1rem; left: 2rem; z-index: 200;
+    display: flex; gap: 0.35rem;
+    background: rgba(10,22,40,0.92);
+    border: 1px solid rgba(29,111,219,0.3);
+    border-radius: 50px; padding: 0.3rem 0.5rem;
+    backdrop-filter: blur(16px);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .lang-btn {
+    background: none; border: none;
+    color: var(--gray); font-family: 'Vazirmatn', sans-serif;
+    font-size: 0.78rem; font-weight: 700;
+    padding: 0.35rem 0.9rem; border-radius: 50px;
+    cursor: pointer; transition: all 0.2s; letter-spacing: 0.5px;
+  }
+  .lang-btn:hover { color: var(--blue-light); }
+  .lang-btn.active {
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-glow));
+    color: white; box-shadow: 0 0 12px rgba(59,143,255,0.4);
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 4rem;
+    background: rgba(10,22,40,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(29,111,219,0.2);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 0.8rem; }
+  .nav-logo .icon {
+    width: 42px; height: 42px;
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-glow));
+    border-radius: 10px; display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem; box-shadow: 0 0 20px rgba(59,143,255,0.4);
+  }
+  .nav-logo .brand-text { line-height: 1.1; }
+  .nav-logo .en { font-size: 1rem; font-weight: 900; letter-spacing: 2px; color: var(--blue-glow); }
+  .nav-logo .fa { font-size: 0.72rem; color: var(--gray); font-weight: 400; }
+  nav ul { display: flex; gap: 2rem; list-style: none; }
+  nav ul a { color: var(--gray); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover { color: var(--blue-light); }
+  .nav-cta {
+    background: linear-gradient(135deg, var(--blue-bright), var(--blue-glow));
+    color: white !important; padding: 0.55rem 1.4rem; border-radius: 8px;
+    font-weight: 700 !important; box-shadow: 0 0 15px rgba(29,111,219,0.4);
+    transition: box-shadow 0.2s, transform 0.2s !important;
+  }
+  .nav-cta:hover { color: white !important; box-shadow: 0 0 28px rgba(59,143,255,0.6) !important; transform: translateY(-1px); }
+
+  /* HERO */
+  .hero {
+    position: relative; z-index: 1; min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 8rem 2rem 4rem; overflow: hidden;
+  }
+  .orb { position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none; }
+  .orb-1 {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(29,111,219,0.35) 0%, transparent 70%);
+    top: -100px; left: 50%; transform: translateX(-50%);
+    animation: pulse 4s ease-in-out infinite;
+  }
+  .orb-2 {
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(59,143,255,0.2) 0%, transparent 70%);
+    bottom: 10%; right: 5%; animation: pulse 6s ease-in-out infinite reverse;
+  }
+  @keyframes pulse {
+    0%,100%{opacity:0.7;transform:translateX(-50%) scale(1);}
+    50%{opacity:1;transform:translateX(-50%) scale(1.1);}
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(29,111,219,0.15); border: 1px solid rgba(59,143,255,0.3);
+    border-radius: 50px; padding: 0.4rem 1.2rem;
+    font-size: 0.82rem; color: var(--blue-light);
+    margin-bottom: 2rem; animation: fadeDown 0.6s ease both;
+  }
+  .hero-badge::before {
+    content:''; width:8px; height:8px;
+    background:var(--blue-glow); border-radius:50%;
+    box-shadow:0 0 8px var(--blue-glow); animation:blink 1.5s ease infinite;
+  }
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+  .hero h1 { font-size:clamp(2.8rem,7vw,5.5rem); font-weight:900; line-height:1.1; margin-bottom:1rem; animation:fadeDown 0.7s 0.1s ease both; }
+  .hero h1 .brand-en {
+    display:block;
+    background:linear-gradient(135deg,var(--white) 30%,var(--blue-pale));
+    -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:4px;
+  }
+  .hero h1 .brand-fa { display:block; font-size:0.5em; font-weight:500; color:var(--blue-light); -webkit-text-fill-color:var(--blue-light); letter-spacing:1px; margin-top:0.3rem; }
+  .hero-sub { font-size:clamp(1rem,2.5vw,1.25rem); color:var(--gray); max-width:520px; line-height:1.8; margin-bottom:2.5rem; animation:fadeDown 0.7s 0.2s ease both; }
+  .hero-sub strong { color:var(--blue-light); font-weight:600; }
+  .hero-btns { display:flex; gap:1rem; flex-wrap:wrap; justify-content:center; animation:fadeDown 0.7s 0.3s ease both; }
+  .btn-primary {
+    display:inline-flex; align-items:center; gap:0.6rem;
+    background:linear-gradient(135deg,var(--blue-bright),var(--blue-glow));
+    color:white; text-decoration:none; padding:0.9rem 2rem; border-radius:12px;
+    font-weight:700; font-size:1rem; box-shadow:0 0 30px rgba(29,111,219,0.5); transition:all 0.25s;
+  }
+  .btn-primary:hover { transform:translateY(-3px); box-shadow:0 0 50px rgba(59,143,255,0.7); }
+  .btn-secondary {
+    display:inline-flex; align-items:center; gap:0.6rem;
+    background:transparent; color:var(--blue-light); text-decoration:none;
+    padding:0.9rem 2rem; border-radius:12px; font-weight:600; font-size:1rem;
+    border:1.5px solid rgba(59,143,255,0.4); transition:all 0.25s;
+  }
+  .btn-secondary:hover { border-color:var(--blue-glow); background:rgba(59,143,255,0.08); transform:translateY(-2px); }
+  .scroll-hint {
+    position:absolute; bottom:2.5rem; left:50%; transform:translateX(-50%);
+    display:flex; flex-direction:column; align-items:center; gap:0.4rem;
+    color:rgba(148,163,184,0.6); font-size:0.75rem; animation:fadeDown 1s 0.8s ease both;
+  }
+  .scroll-hint .mouse { width:22px; height:36px; border:2px solid rgba(148,163,184,0.4); border-radius:11px; display:flex; justify-content:center; padding-top:6px; }
+  .scroll-hint .dot { width:4px; height:8px; background:var(--blue-glow); border-radius:2px; animation:scrollDot 1.5s ease infinite; }
+  @keyframes scrollDot{0%{transform:translateY(0);opacity:1}80%{transform:translateY(12px);opacity:0}100%{transform:translateY(0);opacity:0}}
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+
+  /* STATS */
+  .stats {
+    position:relative; z-index:1;
+    display:flex; justify-content:center; flex-wrap:wrap;
+    background:rgba(13,31,60,0.8);
+    border-top:1px solid rgba(29,111,219,0.2); border-bottom:1px solid rgba(29,111,219,0.2);
+    backdrop-filter:blur(10px);
+  }
+  .stat-item { flex:1; min-width:180px; padding:2.5rem 2rem; text-align:center; border-left:1px solid rgba(29,111,219,0.15); }
+  .stat-item:last-child { border-left:none; }
+  .stat-num { font-size:2.5rem; font-weight:900; color:var(--blue-glow); line-height:1; margin-bottom:0.4rem; }
+  .stat-label { font-size:0.85rem; color:var(--gray); }
+
+  /* SECTIONS */
+  section { position:relative; z-index:1; padding:6rem 4rem; max-width:1200px; margin:0 auto; }
+  .section-tag {
+    display:inline-block; background:rgba(29,111,219,0.15); border:1px solid rgba(59,143,255,0.25);
+    color:var(--blue-light); padding:0.3rem 1rem; border-radius:50px;
+    font-size:0.8rem; font-weight:600; margin-bottom:1rem; letter-spacing:1px;
+  }
+  .section-title { font-size:clamp(1.8rem,4vw,2.8rem); font-weight:900; margin-bottom:1rem; line-height:1.2; }
+  .section-desc { color:var(--gray); font-size:1rem; line-height:1.9; max-width:580px; }
+
+  /* SERVICES */
+  .services-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:1.5rem; margin-top:3.5rem; }
+  .service-card {
+    background:rgba(13,31,60,0.7); border:1px solid rgba(29,111,219,0.2);
+    border-radius:18px; padding:2rem; transition:all 0.3s; position:relative; overflow:hidden; cursor:default;
+  }
+  .service-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(90deg,transparent,var(--blue-glow),transparent); opacity:0; transition:opacity 0.3s; }
+  .service-card:hover { border-color:rgba(59,143,255,0.5); transform:translateY(-6px); box-shadow:0 20px 60px rgba(10,22,40,0.5),0 0 40px rgba(29,111,219,0.15); background:rgba(22,48,90,0.8); }
+  .service-card:hover::before { opacity:1; }
+  .service-icon { width:54px; height:54px; background:linear-gradient(135deg,rgba(29,111,219,0.3),rgba(59,143,255,0.15)); border:1px solid rgba(59,143,255,0.3); border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:1.6rem; margin-bottom:1.2rem; }
+  .service-title { font-size:1.1rem; font-weight:700; margin-bottom:0.6rem; color:var(--white-soft); }
+  .service-desc { font-size:0.88rem; color:var(--gray); line-height:1.7; }
+
+  /* WHY */
+  .why-section {
+    background:rgba(13,31,60,0.5); border-radius:24px; border:1px solid rgba(29,111,219,0.2);
+    display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:center;
+    padding:4rem !important; max-width:1100px; margin:0 auto 4rem;
+  }
+  .why-list { list-style:none; margin-top:2rem; }
+  .why-list li { display:flex; align-items:flex-start; gap:1rem; padding:1.1rem 0; border-bottom:1px solid rgba(29,111,219,0.1); }
+  .why-list li:last-child { border-bottom:none; }
+  .why-list .check { width:28px; height:28px; background:linear-gradient(135deg,var(--blue-bright),var(--blue-glow)); border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:0.75rem; flex-shrink:0; margin-top:2px; box-shadow:0 0 15px rgba(29,111,219,0.3); }
+  .why-list .text strong { display:block; font-size:0.95rem; font-weight:700; color:var(--white-soft); margin-bottom:0.2rem; }
+  .why-list .text span { font-size:0.83rem; color:var(--gray); }
+  .why-visual { display:flex; flex-direction:column; gap:1rem; }
+  .metric-card { background:rgba(10,22,40,0.8); border:1px solid rgba(29,111,219,0.2); border-radius:14px; padding:1.4rem 1.6rem; display:flex; align-items:center; gap:1.2rem; transition:all 0.3s; }
+  .metric-card:hover { border-color:rgba(59,143,255,0.4); }
+  .metric-icon { font-size:2rem; }
+  .metric-info strong { display:block; font-size:1.5rem; font-weight:900; color:var(--blue-glow); }
+  .metric-info span { font-size:0.82rem; color:var(--gray); }
+
+  /* CONTACT */
+  .contact-section { text-align:center; padding:6rem 2rem !important; }
+  .contact-card { max-width:600px; margin:3rem auto 0; background:rgba(13,31,60,0.8); border:1px solid rgba(29,111,219,0.3); border-radius:24px; padding:3rem 2.5rem; position:relative; overflow:hidden; }
+  .contact-card::before { content:''; position:absolute; inset:0; background:linear-gradient(135deg,rgba(29,111,219,0.08) 0%,transparent 60%); pointer-events:none; }
+  .telegram-btn {
+    display:inline-flex; align-items:center; gap:0.8rem;
+    background:linear-gradient(135deg,#229ED9,#1a8bc4); color:white; text-decoration:none;
+    padding:1.1rem 2.5rem; border-radius:14px; font-weight:700; font-size:1.1rem;
+    margin-top:1.8rem; box-shadow:0 10px 40px rgba(34,158,217,0.35); transition:all 0.25s;
+  }
+  .telegram-btn:hover { transform:translateY(-3px); box-shadow:0 15px 50px rgba(34,158,217,0.5); }
+  .contact-desc { color:var(--gray); font-size:0.95rem; line-height:1.8; margin-top:1rem; }
+
+  /* FOOTER */
+  footer { position:relative; z-index:1; background:rgba(7,14,26,0.95); border-top:1px solid rgba(29,111,219,0.15); padding:2.5rem 4rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; }
+  .footer-brand { display:flex; align-items:center; gap:0.7rem; }
+  .footer-brand .en { font-weight:900; letter-spacing:2px; color:var(--blue-glow); }
+  .footer-brand .sep { color:rgba(148,163,184,0.3); margin:0 0.3rem; }
+  .footer-brand .fa { color:var(--gray); font-size:0.9rem; }
+  footer p { color:rgba(148,163,184,0.5); font-size:0.8rem; }
+  .divider { position:relative; z-index:1; height:1px; background:linear-gradient(90deg,transparent,rgba(29,111,219,0.3),transparent); max-width:1200px; margin:0 auto; }
+
+  @media(max-width:768px){
+    nav{padding:1rem 1.5rem;}
+    nav ul{display:none;}
+    .lang-switcher{left:1rem; top:0.8rem;}
+    section{padding:4rem 1.5rem;}
+    .why-section{grid-template-columns:1fr; gap:2rem; padding:2rem !important;}
+    footer{padding:2rem 1.5rem; flex-direction:column; text-align:center;}
+    .stat-item{padding:1.5rem 1rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- LANG SWITCHER -->
+<div class="lang-switcher">
+  <button class="lang-btn active" onclick="setLang('fa')">فا</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+  <button class="lang-btn" onclick="setLang('ar')">عر</button>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <div class="icon">📱</div>
+    <div class="brand-text">
+      <div class="en">UC SOFT</div>
+      <div class="fa" id="nav-sub">یوسی سافت</div>
+    </div>
+  </div>
+  <ul>
+    <li><a href="#services" data-i18n="nav_services">خدمات</a></li>
+    <li><a href="#why" data-i18n="nav_why">چرا ما</a></li>
+    <li><a href="#contact" class="nav-cta" data-i18n="nav_consult">مشاوره رایگان</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="hero-badge" data-i18n="hero_badge">تعمیرات تخصصی نرم‌افزاری موبایل</div>
+  <h1>
+    <span class="brand-en">UC SOFT</span>
+    <span class="brand-fa">یوسی سافت</span>
+  </h1>
+  <p class="hero-sub">
+    <strong data-i18n="hero_slogan">متفاوت در خدمت‌رسانی</strong><br>
+    <span data-i18n="hero_desc">تعمیر تمامی برندهای موبایل با جدیدترین متدهای روز دنیا.<br>تمامی خدمات به صورت حرفه‌ای و تخصصی انجام می‌شود.</span>
+  </p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary" data-i18n="hero_btn1">📲 دریافت مشاوره رایگان</a>
+    <a href="#services" class="btn-secondary" data-i18n="hero_btn2">مشاهده خدمات ←</a>
+  </div>
+  <div class="scroll-hint">
+    <div class="mouse"><div class="dot"></div></div>
+    <span data-i18n="scroll">اسکرول کنید</span>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat-item"><div class="stat-num">+۵۰۰۰</div><div class="stat-label" data-i18n="stat1">مشتری راضی</div></div>
+  <div class="stat-item"><div class="stat-num">+۱۰۰</div><div class="stat-label" data-i18n="stat2">برند پشتیبانی‌شده</div></div>
+  <div class="stat-item"><div class="stat-num">۹۸٪</div><div class="stat-label" data-i18n="stat3">نرخ رضایت مشتری</div></div>
+  <div class="stat-item"><div class="stat-num">۲۴/۷</div><div class="stat-label" data-i18n="stat4">پشتیبانی آنلاین</div></div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-tag" data-i18n="srv_tag">خدمات ما</div>
+  <h2 class="section-title"><span data-i18n="srv_title">طیف گسترده‌ای از</span><br><span style="color:var(--blue-glow)" data-i18n="srv_title2">خدمات نرم‌افزاری</span></h2>
+  <p class="section-desc" data-i18n="srv_desc">با استفاده از پیشرفته‌ترین ابزارها و متدهای روز دنیا، تمامی مشکلات نرم‌افزاری گوشی شما را حل می‌کنیم.</p>
+  <div class="services-grid">
+    <div class="service-card"><div class="service-icon">🔧</div><div class="service-title" data-i18n="s1t">فلش و ریست فکتوری</div><div class="service-desc" data-i18n="s1d">فلش کردن و ریست کامل گوشی با آخرین نسخه‌های رسمی سیستم‌عامل</div></div>
+    <div class="service-card"><div class="service-icon">🔓</div><div class="service-title" data-i18n="s2t">آنلاک و بایپس FRP</div><div class="service-desc" data-i18n="s2d">حذف قفل گوگل، رمز صفحه و بایپس FRP برای تمامی برندها</div></div>
+    <div class="service-card"><div class="service-icon">💾</div><div class="service-title" data-i18n="s3t">بکاپ و ریکاوری داده</div><div class="service-desc" data-i18n="s3d">بازیابی اطلاعات از دست رفته و انتقال ایمن داده‌ها</div></div>
+    <div class="service-card"><div class="service-icon">🛡️</div><div class="service-title" data-i18n="s4t">حذف ویروس و بدافزار</div><div class="service-desc" data-i18n="s4d">پاکسازی کامل سیستم از ویروس، ادور و نرم‌افزارهای مخرب</div></div>
+    <div class="service-card"><div class="service-icon">⚡</div><div class="service-title" data-i18n="s5t">بهینه‌سازی سیستم</div><div class="service-desc" data-i18n="s5d">افزایش سرعت و کارایی گوشی با آخرین متدهای بهینه‌سازی</div></div>
+    <div class="service-card"><div class="service-icon">📡</div><div class="service-title" data-i18n="s6t">رفع مشکل شبکه و سیم‌کارت</div><div class="service-desc" data-i18n="s6d">عیب‌یابی و رفع مشکلات اتصال شبکه، بلوتوث و وای‌فای</div></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY -->
+<section id="why" style="max-width:1200px;margin:0 auto;">
+  <div class="why-section">
+    <div>
+      <div class="section-tag" data-i18n="why_tag">چرا یوسی سافت؟</div>
+      <h2 class="section-title"><span data-i18n="why_title">متفاوت در</span><br><span style="color:var(--blue-glow)" data-i18n="why_title2">خدمت‌رسانی</span></h2>
+      <p class="section-desc" data-i18n="why_desc">ما با سال‌ها تجربه و تخصص، بهترین خدمات نرم‌افزاری را ارائه می‌دهیم.</p>
+      <ul class="why-list">
+        <li><div class="check">✓</div><div class="text"><strong data-i18n="w1t">جدیدترین متدهای روز دنیا</strong><span data-i18n="w1d">استفاده از به‌روزترین ابزارها و تکنیک‌های تخصصی</span></div></li>
+        <li><div class="check">✓</div><div class="text"><strong data-i18n="w2t">پشتیبانی از تمامی برندها</strong><span data-i18n="w2d">سامسونگ، اپل، شیائومی، هواوی و تمامی برندها</span></div></li>
+        <li><div class="check">✓</div><div class="text"><strong data-i18n="w3t">تضمین کیفیت خدمات</strong><span data-i18n="w3d">ارائه ضمانت‌نامه برای تمامی خدمات انجام‌شده</span></div></li>
+        <li><div class="check">✓</div><div class="text"><strong data-i18n="w4t">مشاوره رایگان</strong><span data-i18n="w4d">پاسخ‌گویی رایگان به تمامی سوالات شما</span></div></li>
+      </ul>
+    </div>
+    <div class="why-visual">
+      <div class="metric-card"><div class="metric-icon">⚡</div><div class="metric-info"><strong data-i18n="m1n">سریع</strong><span data-i18n="m1d">انجام سریع سفارشات</span></div></div>
+      <div class="metric-card"><div class="metric-icon">🎯</div><div class="metric-info"><strong data-i18n="m2n">دقیق</strong><span data-i18n="m2d">تشخیص دقیق مشکل و راه‌حل مناسب</span></div></div>
+      <div class="metric-card"><div class="metric-icon">🔒</div><div class="metric-info"><strong data-i18n="m3n">ایمن</strong><span data-i18n="m3d">حفظ کامل اطلاعات شخصی شما</span></div></div>
+      <div class="metric-card"><div class="metric-icon">💬</div><div class="metric-info"><strong data-i18n="m4n">در دسترس</strong><span data-i18n="m4d">پشتیبانی آنلاین همیشگی</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="section-tag" data-i18n="con_tag">ارتباط با ما</div>
+  <h2 class="section-title"><span data-i18n="con_title">آماده خدمت‌رسانی</span><br><span style="color:var(--blue-glow)" data-i18n="con_title2">به شما هستیم</span></h2>
+  <div class="contact-card">
+    <div style="font-size:3rem;margin-bottom:1rem;">📲</div>
+    <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:0.5rem;" data-i18n="con_head">جهت مشاوره و دریافت خدمات</h3>
+    <p class="contact-desc" data-i18n="con_desc">مشتری گرامی، برای دریافت مشاوره رایگان و ارائه خدمات تخصصی،<br>به تلگرام یوسی سافت مراجعه فرمایید.</p>
+    <a href="https://t.me/ucpic" class="telegram-btn" target="_blank">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.562 8.069l-2.078 9.792c-.156.695-.567.864-1.15.537l-3.18-2.34-1.533 1.476c-.17.17-.313.313-.64.313l.228-3.237 5.888-5.318c.256-.228-.055-.354-.398-.126L6.65 14.137l-3.12-.975c-.68-.213-.693-.68.14-.999l12.184-4.697c.566-.205 1.06.126.708.603z"/></svg>
+      <span data-i18n="tg_btn">تلگرام یوسی سافت</span>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <span class="en">UC SOFT</span><span class="sep">|</span><span class="fa">یوسی سافت</span>
+  </div>
+  <p data-i18n="footer_copy">همه حقوق این وبسایت برای گروه نرم‌افزاری یوسی سافت محفوظ است © 2026</p>
+</footer>
+
+<script>
+const translations = {
+  fa: {
+    dir:'rtl', lang:'fa', navsub:'یوسی سافت',
+    nav_services:'خدمات', nav_why:'چرا ما', nav_consult:'مشاوره رایگان',
+    hero_badge:'تعمیرات تخصصی نرم‌افزاری موبایل',
+    hero_slogan:'متفاوت در خدمت‌رسانی',
+    hero_desc:'تعمیر تمامی برندهای موبایل با جدیدترین متدهای روز دنیا.<br>تمامی خدمات به صورت حرفه‌ای و تخصصی انجام می‌شود.',
+    hero_btn1:'📲 دریافت مشاوره رایگان', hero_btn2:'مشاهده خدمات ←',
+    scroll:'اسکرول کنید',
+    stat1:'مشتری راضی', stat2:'برند پشتیبانی‌شده', stat3:'نرخ رضایت مشتری', stat4:'پشتیبانی آنلاین',
+    srv_tag:'خدمات ما', srv_title:'طیف گسترده‌ای از', srv_title2:'خدمات نرم‌افزاری',
+    srv_desc:'با استفاده از پیشرفته‌ترین ابزارها و متدهای روز دنیا، تمامی مشکلات نرم‌افزاری گوشی شما را حل می‌کنیم.',
+    s1t:'فلش و ریست فکتوری', s1d:'فلش کردن و ریست کامل گوشی با آخرین نسخه‌های رسمی سیستم‌عامل',
+    s2t:'آنلاک و بایپس FRP', s2d:'حذف قفل گوگل، رمز صفحه و بایپس FRP برای تمامی برندها',
+    s3t:'بکاپ و ریکاوری داده', s3d:'بازیابی اطلاعات از دست رفته و انتقال ایمن داده‌ها',
+    s4t:'حذف ویروس و بدافزار', s4d:'پاکسازی کامل سیستم از ویروس، ادور و نرم‌افزارهای مخرب',
+    s5t:'بهینه‌سازی سیستم', s5d:'افزایش سرعت و کارایی گوشی با آخرین متدهای بهینه‌سازی',
+    s6t:'رفع مشکل شبکه و سیم‌کارت', s6d:'عیب‌یابی و رفع مشکلات اتصال شبکه، بلوتوث و وای‌فای',
+    why_tag:'چرا یوسی سافت؟', why_title:'متفاوت در', why_title2:'خدمت‌رسانی',
+    why_desc:'ما با سال‌ها تجربه و تخصص، بهترین خدمات نرم‌افزاری را ارائه می‌دهیم.',
+    w1t:'جدیدترین متدهای روز دنیا', w1d:'استفاده از به‌روزترین ابزارها و تکنیک‌های تخصصی',
+    w2t:'پشتیبانی از تمامی برندها', w2d:'سامسونگ، اپل، شیائومی، هواوی و تمامی برندها',
+    w3t:'تضمین کیفیت خدمات', w3d:'ارائه ضمانت‌نامه برای تمامی خدمات انجام‌شده',
+    w4t:'مشاوره رایگان', w4d:'پاسخ‌گویی رایگان به تمامی سوالات شما',
+    m1n:'سریع', m1d:'انجام سریع سفارشات',
+    m2n:'دقیق', m2d:'تشخیص دقیق مشکل و راه‌حل مناسب',
+    m3n:'ایمن', m3d:'حفظ کامل اطلاعات شخصی شما',
+    m4n:'در دسترس', m4d:'پشتیبانی آنلاین همیشگی',
+    con_tag:'ارتباط با ما', con_title:'آماده خدمت‌رسانی', con_title2:'به شما هستیم',
+    con_head:'جهت مشاوره و دریافت خدمات',
+    con_desc:'مشتری گرامی، برای دریافت مشاوره رایگان و ارائه خدمات تخصصی،<br>به تلگرام یوسی سافت مراجعه فرمایید.',
+    tg_btn:'تلگرام یوسی سافت',
+    footer_copy:'همه حقوق این وبسایت برای گروه نرم‌افزاری یوسی سافت محفوظ است © 2026'
+  },
+  en: {
+    dir:'ltr', lang:'en', navsub:'UC SOFT',
+    nav_services:'Services', nav_why:'Why Us', nav_consult:'Free Consultation',
+    hero_badge:'Professional Mobile Software Repair',
+    hero_slogan:'Different in Service',
+    hero_desc:'Repairing all mobile brands using the latest world-class methods.<br>All services are performed professionally and with full expertise.',
+    hero_btn1:'📲 Get Free Consultation', hero_btn2:'View Services →',
+    scroll:'Scroll down',
+    stat1:'Happy Customers', stat2:'Supported Brands', stat3:'Satisfaction Rate', stat4:'Online Support',
+    srv_tag:'Our Services', srv_title:'A Wide Range of', srv_title2:'Software Services',
+    srv_desc:'Using the most advanced tools and modern methods, we solve all software issues on your phone.',
+    s1t:'Flash & Factory Reset', s1d:'Full phone flash and reset using the latest official OS versions',
+    s2t:'Unlock & FRP Bypass', s2d:'Remove Google lock, screen password and FRP bypass for all brands',
+    s3t:'Backup & Data Recovery', s3d:'Recover lost data and transfer information safely',
+    s4t:'Virus & Malware Removal', s4d:'Complete system cleanup from viruses, adware and malicious software',
+    s5t:'System Optimization', s5d:'Boost phone speed and performance with the latest optimization techniques',
+    s6t:'Network & SIM Issues', s6d:'Diagnose and fix network, Bluetooth and WiFi connection problems',
+    why_tag:'Why UC SOFT?', why_title:'Different in', why_title2:'Service',
+    why_desc:'With years of experience and expertise, we deliver the best software services.',
+    w1t:'Latest World-Class Methods', w1d:'Using the most up-to-date tools and specialized techniques',
+    w2t:'All Brands Supported', w2d:'Samsung, Apple, Xiaomi, Huawei and all other brands',
+    w3t:'Quality Guarantee', w3d:'Warranty provided for all completed services',
+    w4t:'Free Consultation', w4d:'Free answers to all your questions',
+    m1n:'Fast', m1d:'Quick order completion',
+    m2n:'Precise', m2d:'Accurate diagnosis and the right solution',
+    m3n:'Secure', m3d:'Your personal data is fully protected',
+    m4n:'Available', m4d:'Always-on online support',
+    con_tag:'Contact Us', con_title:'Ready to Serve', con_title2:'You',
+    con_head:'For Consultation & Services',
+    con_desc:'Dear customer, for free consultation and professional services,<br>please visit UC SOFT on Telegram.',
+    tg_btn:'UC SOFT on Telegram',
+    footer_copy:'All rights reserved for UC SOFT Software Group © 2026'
+  },
+  ar: {
+    dir:'rtl', lang:'ar', navsub:'يوسي سافت',
+    nav_services:'الخدمات', nav_why:'لماذا نحن', nav_consult:'استشارة مجانية',
+    hero_badge:'إصلاح متخصص لبرامج الهواتف',
+    hero_slogan:'مختلفون في الخدمة',
+    hero_desc:'إصلاح جميع ماركات الهواتف بأحدث أساليب العالم.<br>جميع الخدمات تُقدَّم باحترافية وتخصص عالٍ.',
+    hero_btn1:'📲 احصل على استشارة مجانية', hero_btn2:'عرض الخدمات ←',
+    scroll:'مرر للأسفل',
+    stat1:'عميل راضٍ', stat2:'علامة مدعومة', stat3:'معدل الرضا', stat4:'دعم على مدار الساعة',
+    srv_tag:'خدماتنا', srv_title:'مجموعة واسعة من', srv_title2:'خدمات البرمجيات',
+    srv_desc:'باستخدام أحدث الأدوات والأساليب العالمية، نحل جميع مشاكل برامج هاتفك.',
+    s1t:'فلاش وإعادة الضبط', s1d:'فلاش كامل وإعادة ضبط الهاتف بأحدث إصدارات نظام التشغيل الرسمية',
+    s2t:'فتح القفل وتجاوز FRP', s2d:'إزالة قفل جوجل وكلمة مرور الشاشة وتجاوز FRP لجميع الماركات',
+    s3t:'النسخ الاحتياطي واسترداد البيانات', s3d:'استرداد البيانات المفقودة ونقل المعلومات بأمان',
+    s4t:'إزالة الفيروسات والبرمجيات الضارة', s4d:'تنظيف كامل للنظام من الفيروسات والبرمجيات الخبيثة',
+    s5t:'تحسين أداء النظام', s5d:'تعزيز سرعة الهاتف وكفاءته بأحدث تقنيات التحسين',
+    s6t:'مشاكل الشبكة وبطاقة SIM', s6d:'تشخيص وإصلاح مشاكل الاتصال بالشبكة والبلوتوث والواي فاي',
+    why_tag:'لماذا يوسي سافت؟', why_title:'مختلفون في', why_title2:'الخدمة',
+    why_desc:'بسنوات من الخبرة والتخصص، نقدم أفضل خدمات البرمجيات.',
+    w1t:'أحدث الأساليب العالمية', w1d:'استخدام أحدث الأدوات والتقنيات المتخصصة',
+    w2t:'دعم جميع الماركات', w2d:'سامسونج، آبل، شاومي، هواوي وجميع الماركات',
+    w3t:'ضمان جودة الخدمة', w3d:'ضمان لجميع الخدمات المنجزة',
+    w4t:'استشارة مجانية', w4d:'إجابة مجانية على جميع أسئلتك',
+    m1n:'سريع', m1d:'إنجاز الطلبات بسرعة',
+    m2n:'دقيق', m2d:'تشخيص دقيق للمشكلة والحل المناسب',
+    m3n:'آمن', m3d:'حماية كاملة لبياناتك الشخصية',
+    m4n:'متاح دائماً', m4d:'دعم إلكتروني على مدار الساعة',
+    con_tag:'تواصل معنا', con_title:'مستعدون لخدمتكم', con_title2:'دائماً',
+    con_head:'للاستشارة والحصول على الخدمات',
+    con_desc:'عزيزي العميل، للحصول على استشارة مجانية وخدمات متخصصة،<br>يرجى التواصل معنا عبر تيليغرام يوسي سافت.',
+    tg_btn:'يوسي سافت على تيليغرام',
+    footer_copy:'جميع حقوق هذا الموقع محفوظة لمجموعة يوسي سافت للبرمجيات © 2026'
+  }
+};
+
+function setLang(lang) {
+  const t = translations[lang];
+  const html = document.getElementById('htmlRoot');
+  html.setAttribute('lang', t.lang);
+  html.setAttribute('dir', t.dir);
+
+  // active button
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.remove('active');
+    if (btn.getAttribute('onclick').includes("'" + lang + "'")) btn.classList.add('active');
+  });
+
+  // nav sub label
+  document.getElementById('nav-sub').textContent = t.navsub;
+
+  // all text nodes
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+}
+</script>
+</body>
+</html>
